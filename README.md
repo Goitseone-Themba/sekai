@@ -21,3 +21,5 @@ Event {
 UniversalSet {
 - < Cardinality of each set in the world >
 }
+
+![Screenshot](./screenshot.png)
