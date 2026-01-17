@@ -1,5 +1,13 @@
 # sekai
 
+```bash 
+git clone http://github.com/Goitseone-Themba/sekai.git
+cd sekai
+gcc main.c -o sekai $(pkg-config --libs --cflags raylib)
+./sekai
+
+```
+
 Base {
   - posX
   - posY
