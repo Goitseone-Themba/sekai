@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include <stdio.h>
 
 typedef enum GameScreen { Splash, GamePlay, Credits } GameScreen;
 
@@ -16,6 +17,7 @@ typedef struct {
   int posX;
   int posY;
   int radius;
+  int lifeSpan;
 } Base;
 
 int main(void) {
@@ -27,10 +29,10 @@ int main(void) {
 
   GameScreen currentScreen = Splash;
 
-  Base kami = {0, "Entity", "Kami", 100, 100, 50};
-  Base ent1 = {1, "Entity", "Musashi Miamoto", 200, 200, 40};
-  Base ent2 = {2, "Entity", "Satoshi Nakamoto", 300, 300, 30};
-  Base art1 = {3, "Artefact", "Fuji", 400, 400, 45};
+  Base kami = {0, "Entity", "Kami", 100, 100, 50, 800};
+  Base ent1 = {1, "Entity", "Musashi Miamoto", 200, 200, 40, 300};
+  Base ent2 = {2, "Entity", "Satoshi Nakamoto", 300, 300, 30, 200};
+  Base art1 = {3, "Artefact", "Fuji", 400, 400, 45, 500};
 
   Base sekai[4] = {kami, art1, ent1, ent2};
 
@@ -44,7 +46,7 @@ int main(void) {
     switch (currentScreen) {
     case Splash: {
       frameCounter = frameCounter + 2;
-      if (frameCounter > 400) {
+      if (frameCounter > 250) {
         currentScreen = GamePlay;
       }
     } break;
@@ -65,9 +67,18 @@ int main(void) {
       DrawText(title.text, title.posX, title.posY, title.fontSize, DARKGRAY);
 
       for (int i = 0; i < 4; i++) {
-        DrawCircle(sekai[i].posX, sekai[i].posY, sekai[i].radius, RED);
+        sekai[i].lifeSpan--;
+        Color color = RED;
+        Color nameColor = GRAY;
+        printf("%s: %d\n",sekai[i].name, sekai[i].lifeSpan);
+
+        if (sekai[i].lifeSpan <= 0) {
+          color = GRAY;
+          nameColor = DARKGRAY;
+        }
+        DrawCircle(sekai[i].posX, sekai[i].posY, sekai[i].radius, color);
         DrawText(sekai[i].name, sekai[i].posX, sekai[i].posY, sekai[i].radius,
-                 DARKGRAY);
+                 nameColor);
       }
 
     } break;

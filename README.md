@@ -16,6 +16,7 @@ Base {
 
 Entity {
 - vital_status
+- lifeSpan
 }
 
 Artifact {
