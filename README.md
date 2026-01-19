@@ -31,4 +31,5 @@ UniversalSet {
 - < Cardinality of each set in the world >
 }
 
-![Screenshot](./screenshot.png)
+![loading screen](./assets/images/loading.png)
+![screenshot](./assets/images/gameplay.png)
