@@ -32,4 +32,5 @@ UniversalSet {
 }
 
 ![loading screen](./assets/images/loading.png)
+![audio controls](./assets/images/audio-controls.png)
 ![screenshot](./assets/images/gameplay.png)
