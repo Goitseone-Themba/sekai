@@ -40,7 +40,7 @@ int main(void) {
   InitWindow(screenWidth, screenHeight, title.text);
   InitAudioDevice();
 
-  Music music = LoadMusicStream("music.mp3");
+  Music music = LoadMusicStream("assets/audio/music.mp3");
 
   PlayMusicStream(music);
 
