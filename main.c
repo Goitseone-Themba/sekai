@@ -21,6 +21,17 @@ typedef struct {
   int lifeSpan;
 } Base;
 
+float realTime = 0.0f;
+float gameTime = 0.0f;
+int timer = 0;
+int seconds = 0;
+int minutes = 0;
+int hours = 0;
+int days = 0;
+int years = 0;
+
+char *timeOfDay = "";
+
 int main(void) {
 
   int screenWidth = 800;
@@ -82,6 +93,23 @@ int main(void) {
     default:
       break;
     }
+
+    realTime += GetFrameTime();
+    gameTime = realTime * 60.0f;
+
+    timer = (int)gameTime;
+    seconds = timer % 60;
+    minutes = (timer / 60) % 60;
+    hours = ((timer / 60) / 60) % 24;
+    days = (((timer / 60) / 60) / 24) % 365;
+    years = (((timer / 60) / 60) / 24) / 365;
+
+    if (hours > 6 && hours < 18) {
+      timeOfDay = "day";
+    } else {
+      timeOfDay = "night";
+    }
+
     BeginDrawing();
     switch (currentScreen) {
     case Splash: {
@@ -94,6 +122,10 @@ int main(void) {
 
       ClearBackground(RAYWHITE);
       DrawText(title.text, title.posX, title.posY, title.fontSize, DARKGRAY);
+      DrawText(TextFormat("%s", timeOfDay), GetScreenWidth() - 350, 10, 28,
+               BLUE);
+      DrawText(TextFormat("%02d:%02d:%02d:%02d", days, hours, minutes, seconds),
+               GetScreenWidth() - 250, 10, 28, RED);
 
       for (int i = 0; i < 4; i++) {
         sekai[i].lifeSpan--;
